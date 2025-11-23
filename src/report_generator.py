@@ -6,12 +6,12 @@ class ReportGenerator:
     def __init__(self, database_manager):
         self.db = database_manager
     
+    # Format angka menjadi format currency Indonesia
     def format_currency(self, value):
-        """Format angka menjadi format currency Indonesia"""
         return f"Rp{value:,.0f}".replace(",", ".")
     
+    # Generate PDF report dari data history
     def generate_pdf_report(self):
-        """Generate PDF report dari data history"""
         pdf = FPDF()
         pdf.add_page()
         

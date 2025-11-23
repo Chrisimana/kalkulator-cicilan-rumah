@@ -32,8 +32,8 @@ class DatabaseManager:
         conn.commit()
         conn.close()
     
+    # Menyimpan data perhitungan ke database
     def simpan_perhitungan(self, data):
-        """Menyimpan data perhitungan ke database"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
@@ -54,8 +54,8 @@ class DatabaseManager:
         conn.commit()
         conn.close()
     
+    # Mengambil history perhitungan
     def ambil_history(self, limit=50):
-        """Mengambil history perhitungan"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
@@ -70,8 +70,8 @@ class DatabaseManager:
         
         return results
     
+    # Menghapus data history berdasarkan ID
     def hapus_history(self, id_perhitungan):
-        """Menghapus data history berdasarkan ID"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
@@ -80,8 +80,8 @@ class DatabaseManager:
         conn.commit()
         conn.close()
     
+    # Menghapus semua data history
     def hapus_semua_history(self):
-        """Menghapus semua data history"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         

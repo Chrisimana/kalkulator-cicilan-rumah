@@ -55,8 +55,8 @@ class CicilanRumahApp:
         self.setup_history_tab()
         self.setup_grafik_tab()
     
+    # Setup style untuk widgets
     def setup_styles(self):
-        """Setup style untuk widgets"""
         style = ttk.Style()
         style.theme_use('clam')
         
@@ -69,8 +69,8 @@ class CicilanRumahApp:
         style.configure('Success.TButton', background='#27AE60', foreground='white')
         style.configure('Danger.TButton', background='#E74C3C', foreground='white')
         
+    # Setup tab kalkulator
     def setup_kalkulator_tab(self):
-        """Setup tab kalkulator"""
         # Main frame
         main_frame = ttk.Frame(self.tab_kalkulator)
         main_frame.pack(fill='both', expand=True, padx=10, pady=10)
@@ -133,8 +133,8 @@ class CicilanRumahApp:
         self.results_text.pack(fill='both', expand=True)
         self.results_text.config(state=tk.DISABLED)
     
+    # Setup tab history
     def setup_history_tab(self):
-        """Setup tab history"""
         # Toolbar frame
         toolbar_frame = ttk.Frame(self.tab_history)
         toolbar_frame.pack(fill='x', padx=10, pady=10)
@@ -196,8 +196,8 @@ class CicilanRumahApp:
         # Load initial history
         self.load_history()
     
+    # Setup tab grafik
     def setup_grafik_tab(self):
-        """Setup tab grafik"""
         # Toolbar frame
         toolbar_frame = ttk.Frame(self.tab_grafik)
         toolbar_frame.pack(fill='x', padx=10, pady=10)
@@ -210,15 +210,15 @@ class CicilanRumahApp:
         self.grafik_frame = ttk.Frame(self.tab_grafik)
         self.grafik_frame.pack(fill='both', expand=True, padx=10, pady=10)
     
+    # Format angka menjadi format currency Indonesia
     def format_currency(self, value):
-        """Format angka menjadi format currency Indonesia"""
         try:
             return f"Rp{value:,.0f}".replace(",", ".")
         except:
             return f"Rp{value:,.0f}"
     
+    # Mengosongkan form input
     def clear_form(self):
-        """Mengosongkan form input"""
         self.entry_nama.delete(0, 'end')
         self.entry_harga_asal.delete(0, 'end')
         self.entry_harga_jual.delete(0, 'end')
@@ -229,8 +229,8 @@ class CicilanRumahApp:
         self.results_text.delete(1.0, tk.END)
         self.results_text.config(state=tk.DISABLED)
     
+    # Menghitung cicilan berdasarkan input
     def hitung_cicilan(self):
-        """Menghitung cicilan berdasarkan input"""
         try:
             nama_proyek = self.entry_nama.get().strip()
             harga_asal = float(self.entry_harga_asal.get().replace('.', '').replace(',', ''))
@@ -281,8 +281,8 @@ class CicilanRumahApp:
         except Exception as e:
             messagebox.showerror("Error", f"Terjadi kesalahan: {str(e)}")
     
+    # Menampilkan hasil perhitungan
     def tampilkan_hasil(self, data):
-        """Menampilkan hasil perhitungan"""
         self.results_text.config(state=tk.NORMAL)
         self.results_text.delete(1.0, tk.END)
         
@@ -311,8 +311,8 @@ class CicilanRumahApp:
         self.results_text.insert(tk.END, hasil_text)
         self.results_text.config(state=tk.DISABLED)
     
+    # Memuat data history
     def load_history(self):
-        """Memuat data history"""
         # Clear existing data
         for item in self.tree_history.get_children():
             self.tree_history.delete(item)
@@ -332,15 +332,15 @@ class CicilanRumahApp:
             )
             self.tree_history.insert("", "end", values=formatted_row)
     
+    # Menghapus semua history
     def clear_history(self):
-        """Menghapus semua history"""
         if messagebox.askyesno("Konfirmasi", "Apakah Anda yakin ingin menghapus semua history? Tindakan ini tidak dapat dibatalkan!"):
             self.db.hapus_semua_history()
             self.load_history()
             messagebox.showinfo("Sukses", "History berhasil dihapus!")
     
+    # Generate grafik analisis
     def generate_grafik(self):
-        """Generate grafik analisis"""
         try:
             history_data = self.db.ambil_history(limit=10)
             
@@ -411,14 +411,14 @@ class CicilanRumahApp:
         except Exception as e:
             messagebox.showerror("Error", f"Gagal generate grafik: {str(e)}")
     
+    # Export laporan ke file
     def export_laporan(self):
-        """Export laporan ke file"""
         try:
             filename = self.report_generator.generate_pdf_report()
             messagebox.showinfo("Sukses", f"Laporan berhasil diexport!\n\nFile: {filename}")
         except Exception as e:
             messagebox.showerror("Error", f"Gagal export laporan: {str(e)}")
     
+    # Menjalankan aplikasi
     def run(self):
-        """Menjalankan aplikasi"""
         self.root.mainloop()

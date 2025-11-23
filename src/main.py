@@ -4,10 +4,10 @@ import os
 # Tambahkan path ke sys.path agar modules dapat diimport
 sys.path.append(os.path.join(os.path.dirname(__file__), 'modules'))
 
-from gui_app import CicilanRumahApp
+from gui import CicilanRumahApp
 
+# Fungsi utama untuk menjalankan aplikasi
 def main():
-    """Fungsi utama untuk menjalankan aplikasi"""
     try:
         print("🚀 Menjalankan Kalkulator Cicilan Rumah...")
         print("📁 Memuat database...")
